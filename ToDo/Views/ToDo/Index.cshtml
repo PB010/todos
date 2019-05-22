@@ -1,0 +1,38 @@
+﻿@using System.Web.UI.WebControls
+@using ToDo.Core.Models
+@model ToDo.Core.ViewModels.ToDoFormViewModel
+
+@{
+    ViewBag.Title = "New ToDo";
+}
+
+<h2>New ToDo</h2>
+
+@using (Html.BeginForm("Create", "ToDo"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Time)
+        @Html.TextBoxFor(m => m.Time, new { @class = "form-control", @Value = "", @placeholder = "e.g. 15 jan 19:00" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ToDoPriority)
+        @Html.DropDownListFor(m => m.ToDoPriority, new SelectList(Model.ToDoPriorities,
+            "Id",
+            "Name"),
+            "",
+            new { @class = "form-control"})
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.CreatedAt, new { @Value = DateTime.Now})
+    @Html.HiddenFor(m => m.ToDoStatus, new { @Value = ToDoStatus.Open})
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+}
