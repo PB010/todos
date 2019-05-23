@@ -196,6 +196,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\Migrations\201905221833411_AddToDoListAndPriority.cs" />
     <Compile Include="Persistence\Migrations\201905221833411_AddToDoListAndPriority.Designer.cs">
       <DependentUpon>201905221833411_AddToDoListAndPriority.cs</DependentUpon>
