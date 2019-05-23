@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using ToDo.Core.Models;
 using ToDo.Persistence;
 
@@ -77,6 +79,26 @@ namespace ToDo.Controllers
             var todo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
                 .OrderByDescending(t => t.CreatedAt);
+
+            return View("Index", todo);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult FurtherDate()
+        {
+            var todo = _context.ToDoLists
+                .Include(t => t.ToDoPriorities).OrderByDescending(t => t.Time);
+
+            return View("Index", todo);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult CloserDate()
+        {
+            var todo = _context.ToDoLists
+                .Include(t => t.ToDoPriorities).OrderBy(t => t.Time);
 
             return View("Index", todo);
         }

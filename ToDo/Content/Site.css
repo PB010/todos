@@ -28,6 +28,10 @@ textarea {
     color: white;
 }
 
+.custom {
+    margin-bottom: 7px;
+}
+
 .new-color > .btn .btn-link {
     color: white;
 }

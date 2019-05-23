@@ -15,14 +15,26 @@ else
 {
     <h2>My ToDo List</h2>
     <div>
-        <div>
+        <div class="custom">
             @Html.ActionLink("New ToDo",
                 "Index",
                 "ToDo",
                 null,
-                new {@class = "btn btn-default"})
+                new { @class = "btn btn-default" })
         </div>
-        
+        <div class="pull-left">
+            @Html.ActionLink("Closest",
+                "CloserDate",
+                "Home",
+                null,
+                new { @class = "btn btn-default" })
+            @Html.ActionLink("Furthest",
+                "FurtherDate",
+                "Home",
+                null,
+                new { @class = "btn btn-default" })
+        </div>
+
         <div class="pull-right">
             @Html.ActionLink("Oldest",
                 "SortAscending",
