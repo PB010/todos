@@ -23,6 +23,14 @@ textarea {
     max-width: 280px;
 }
 
+.new-color {
+    background-color: darkgreen;
+    color: white;
+}
+
+.new-color > .btn .btn-link {
+    color: white;
+}
 
 /* Bootstrap overrides*/
 .input-validation-error {

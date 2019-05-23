@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ToDo.Core.Models.ToDoList>
+﻿@using ToDo.Core.Models
+@model IEnumerable<ToDo.Core.Models.ToDoList>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -36,24 +37,79 @@ else
         <tbody>
             @foreach (var todo in Model)
             {
-                <tr>
+                <tr class="@(todo.ToDoStatus == ToDoStatus.Open ? "" : "new-color")">
                     <td>@todo.Name</td>
                     <td>@todo.Description</td>
                     <td>@todo.Time.ToString("dd MMM yyy // HH:mm")</td>
                     <td>@todo.ToDoPriorities.Name</td>
                     <td>@todo.CreatedAt</td>
                     <td>@todo.UpdatedAt</td>
-                    <td>@todo.ToDoStatus</td>
+                    <td>
+                        <button data-id-attr="@todo.Id" class="btn-link js-status-todo">@todo.ToDoStatus</button>
+                    </td>
                     <td>
                         @Html.ActionLink("Edit",
                             "Edit",
                             "ToDo",
                             new { id = todo.Id},
                             new { @class = "btn-link"})
-                        <button class="btn-link">Delete</button>
+                        <button data-id-attr="@todo.Id" class="btn-link js-delete-todo">Delete</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".js-delete-todo").on("click", function (e) {
+                var deleteButton = $(e.target);
+                if (confirm("Are you sure you want to delete this ToDo")) {
+                    $.ajax({
+                            url: "/api/todos/" + deleteButton.attr("data-id-attr"),
+                            method: "DELETE"
+                        })
+                        .done(function() {
+                            deleteButton.closest('tr').remove();
+                        })
+                        .fail(function() {
+                            alert("fail");
+                        });
+                }
+            });
+
+            
+            $(".js-status-todo").on("click", function(e) {
+                var statusButton = $(e.target);
+                if (!statusButton.parents('tr').hasClass("new-color")) {
+                    $.ajax({
+                            url: "/api/todos/" + statusButton.attr("data-id-attr"),
+                            method: "PUT"
+                        })
+                        .done(function() {
+                            statusButton
+                                .text("Done")
+                                .parents('tr')
+                                .addClass("new-color");
+                        });
+                } else {
+                    $.ajax({
+                            url: "/api/todos/" + statusButton.attr("data-id-attr"),
+                            method: "PUT"
+                        })
+                        .done(function() {
+                            statusButton
+                                .text("Open")
+                                .parents('tr')
+                                .removeClass("new-color");
+                        });
+
+                }
+                
+            });
+        });
+    </script>
 }
