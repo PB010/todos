@@ -14,16 +14,19 @@ namespace ToDo.Core.ViewModels
         [Required]
         public string Description { get; set; }
         [Required]
-        public string Time { get; set; }
+        public DateTime Time { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public ToDoStatus ToDoStatus { get; set; }  
+        public ToDoStatus ToDoStatus { get; set; } 
+        [Required]
+        [Display(Name = "Priority")]
         public int ToDoPriority { get; set; }
         public IEnumerable<ToDoPriorities> ToDoPriorities { get; set; }
+        public string Heading { get; set; }
 
-        public DateTime GetTime()
+        public string Action
         {
-            return Convert.ToDateTime(Time);
+            get { return (Id == 0) ? "New" : "Update"; }
         }
+
     }
 }

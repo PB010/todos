@@ -1,0 +1,66 @@
+﻿@using System.Web.UI.WebControls
+@using ToDo.Core.Models
+@model ToDo.Core.ViewModels.ToDoFormViewModel
+
+@{
+    
+    ViewBag.Title = Model.Heading;
+}
+
+<h2>@Model.Heading</h2>
+
+@using (Html.BeginForm(@Model.Action, "ToDo"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Time)
+        @Html.TextBoxFor(m => m.Time, new { @class = "form-control", @Value = "", @placeholder = "e.g. 15 jan 2020 19:00" })
+        @Html.ValidationMessageFor(m => m.Time)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ToDoPriority)
+        @Html.DropDownListFor(m => m.ToDoPriority, new SelectList(Model.ToDoPriorities,
+            "Id",
+            "Name"),
+            "",
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ToDoPriority)
+    </div>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.CreatedAt, new { @Value = DateTime.Now })
+    @Html.HiddenFor(m => m.ToDoStatus, new { @Value = ToDoStatus.Open })
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script>
+        $(document).ready(function() {
+            $('.js-update-todo').on("click", function(e) {
+                var updateButton = $(e.target);
+                $.ajax({
+                    url: "/api/todos/" + updateButton.attr(""),
+                    method: "put"
+                })
+                .done(function() {
+                    alert("successful");
+                })
+                .fail(function() {
+                    alert("something went wrong");
+                });
+            });
+        });
+    </script>*@
+}
