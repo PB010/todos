@@ -207,9 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201905230648023_CreateTable.cs" />
-    <Compile Include="Persistence\Migrations\201905230648023_CreateTable.Designer.cs">
-      <DependentUpon>201905230648023_CreateTable.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201905231743479_InitialMigration.cs" />
+    <Compile Include="Persistence\Migrations\201905231743479_InitialMigration.Designer.cs">
+      <DependentUpon>201905231743479_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -290,12 +290,12 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Persistence\Migrations\201905230648023_CreateTable.resx">
-      <DependentUpon>201905230648023_CreateTable.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Persistence\Migrations\201905231743479_InitialMigration.resx">
+      <DependentUpon>201905231743479_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

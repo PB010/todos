@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using ToDo.Core;
 using ToDo.Core.Models;
 using ToDo.Persistence;
 
@@ -29,6 +28,7 @@ namespace ToDo.Controllers
             return View(toDo);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult SortByName()
         {
@@ -37,6 +37,7 @@ namespace ToDo.Controllers
             return View("Index", todoName); 
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult SortByPriority()
         {
@@ -47,6 +48,7 @@ namespace ToDo.Controllers
             return View("Index", todoPriority);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult SortByStatus()
         {
@@ -57,16 +59,26 @@ namespace ToDo.Controllers
             return View("Index", todoStatus);
         }
 
+        [Authorize]
         [HttpGet]
-        public ActionResult FilterByCreatedAt()
+        public ActionResult SortAscending()
         {
-            var todoCreated = _context.ToDoLists
-                .Include(t => t.ToDoPriorities);
-            var check = false;
+            var todo = _context.ToDoLists
+                .Include(t => t.ToDoPriorities)
+                .OrderBy(t => t.CreatedAt);
 
-
-            return View("Index", todoCreated);
+            return View("Index", todo);
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult SortDescending()
+        {
+            var todo = _context.ToDoLists
+                .Include(t => t.ToDoPriorities)
+                .OrderByDescending(t => t.CreatedAt);
+
+            return View("Index", todo);
+        }
     }
 }

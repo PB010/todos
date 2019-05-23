@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web.Http;
 using System.Web.UI.WebControls;
 using ToDo.Core.Models;
@@ -17,13 +18,13 @@ namespace ToDo.Controllers.api
             _context = new ApplicationDbContext();
         }
 
-       // [HttpGet]
-       // public IHttpActionResult Get()
-       // {
-       //     var todo = _context.ToDoLists.Include(t => t.ToDoPriorities).ToList();
-       //
-       //     return Ok(todo);
-       // }
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            var todo = _context.ToDoLists.Include(t => t.ToDoPriorities).ToList();
+       
+            return Ok(todo);
+        }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
@@ -54,12 +55,14 @@ namespace ToDo.Controllers.api
             return Ok(todo);
         }
 
+        [Route("api/toDos/orderBy")]
         [HttpGet]
-        public IHttpActionResult SortBy()
+        public IHttpActionResult OrderBy()
         {
-            var todos = _context.ToDoLists.OrderBy(t => t.Name);
+            var todo = _context.ToDoLists.Include(t => t.ToDoPriorities).OrderByDescending(t => t.CreatedAt);
 
-            return Ok(todos);
+            return Ok(todo);
         }
+        
     }
 }
