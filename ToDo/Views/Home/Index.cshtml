@@ -24,13 +24,21 @@ else
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Name</th>
+            <th>
+                @Html.ActionLink("Name", "SortByName", "Home")
+            </th>
             <th>Description</th>
             <th>Time</th>
-            <th>Priority</th>
-            <th>Created At</th>
+            <th>
+                @Html.ActionLink("Priority", "SortByPriority", "Home")
+            </th>
+            <th>
+                @Html.ActionLink("Created At", "FilterByCreatedAt", "Home")
+            </th>
             <th>Updated At</th>
-            <th>Status</th>
+            <th>
+                @Html.ActionLink("Status", "SortByStatus", "Home")
+            </th>
             <th>Action</th>
         </tr>
         </thead>
