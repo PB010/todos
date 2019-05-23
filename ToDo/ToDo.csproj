@@ -196,11 +196,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Persistence\Migrations\201905221833411_AddToDoListAndPriority.cs" />
-    <Compile Include="Persistence\Migrations\201905221833411_AddToDoListAndPriority.Designer.cs">
-      <DependentUpon>201905221833411_AddToDoListAndPriority.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Configuration\ToDoConfiguration.cs" />
@@ -265,11 +260,6 @@
     <Content Include="Views\ToDo\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Persistence\Migrations\201905221833411_AddToDoListAndPriority.resx">
-      <DependentUpon>201905221833411_AddToDoListAndPriority.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
