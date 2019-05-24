@@ -96,10 +96,5 @@ namespace ToDo.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Email()
-        {
-
-            return View();
-        }
     }
 }

@@ -13,5 +13,6 @@ namespace ToDo.Core.Models
         public ToDoStatus ToDoStatus { get; set; }
         public int ToDoPrioritiesId { get; set; }
         public ToDoPriorities ToDoPriorities { get; set; }
+        public EmailHourCheck EmailHourCheck { get; set; }
     }
 }
