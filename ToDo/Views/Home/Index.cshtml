@@ -3,7 +3,6 @@
 @model IEnumerable<ToDo.Core.ViewModels.ToDoViewModel>
 @{
     ViewBag.Title = "Home Page";
-    var pass = ConfigurationManager.AppSettings["Pass"];
 }
 
 @if (!User.Identity.IsAuthenticated)
@@ -54,7 +53,7 @@ else
                 <th>Created At.</th>
                 <th>Updated At</th>
                 <th>
-                    @Html.ActionLink("StatusController", "SortByStatus", "Home")
+                    @Html.ActionLink("Status", "SortByStatus", "Home")
                 </th>
                 <th>Action</th>
             </tr>
@@ -65,7 +64,7 @@ else
                 var time = new TimeSpan();
                 time = todo.Time - DateTime.Now;
                 <tr class="@(todo.ToDoStatus == ToDoStatus.Open ? "" : "new-color")">
-                    <td>@todo.Name @time.TotalHours</td>
+                    <td>@todo.Name</td>
                     <td>@todo.Description</td>
                     <td>@todo.Time.ToString("dd MMM yyy // HH:mm")</td>
                     <td>@todo.ToDoPriorities.Name</td>
@@ -80,9 +79,17 @@ else
                             "ToDo",
                             new { id = todo.Id },
                             new { @class = "btn-link" })
-                        <button data-id-attr="@todo.Id" class="btn-link js-delete-todo">StatusController</button>
+                        <button data-id-attr="@todo.Id" class="btn-link js-delete-todo">Delete</button>
                     </td>
                 </tr>
+                if (time.TotalMinutes <= 60 && time.TotalMinutes > 30 && !EmailSender.Hour)
+                {
+                    EmailSender.SendAnHourBefore(todo);
+                }
+                else if (time.TotalMinutes <= 30 && EmailSender.HalfAnHour)
+                {
+                    EmailSender.SendHalfAnHourBefore(todo);
+                }
             }
         </tbody>
     </table>
