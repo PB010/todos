@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls.WebParts;
 using ToDo.Core.Models;
 using ToDo.Core.ViewModels;
 using ToDo.Persistence;
@@ -97,6 +96,10 @@ namespace ToDo.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+        public ActionResult Email()
+        {
+
+            return View();
+        }
     }
 }

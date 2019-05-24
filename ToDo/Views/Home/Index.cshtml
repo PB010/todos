@@ -1,7 +1,9 @@
-﻿@using ToDo.Core.Models
+﻿@using System.Configuration
+@using ToDo.Core.Models
 @model IEnumerable<ToDo.Core.ViewModels.ToDoViewModel>
 @{
     ViewBag.Title = "Home Page";
+    var pass = ConfigurationManager.AppSettings["Pass"];
 }
 
 @if (!User.Identity.IsAuthenticated)
@@ -13,6 +15,11 @@
 
 else
 {
+    <button onclick=@EmailSender.Send()>Test</button>
+
+
+
+
     <h2>My ToDo List</h2>
     <div>
         <div class="custom">
@@ -62,8 +69,10 @@ else
         <tbody>
             @foreach (var todo in Model)
             {
+                var time = new TimeSpan();
+                time = todo.Time - DateTime.Now;
                 <tr class="@(todo.ToDoStatus == ToDoStatus.Open ? "" : "new-color")">
-                    <td>@todo.Name</td>
+                    <td>@todo.Name @time.TotalHours</td>
                     <td>@todo.Description</td>
                     <td>@todo.Time.ToString("dd MMM yyy // HH:mm")</td>
                     <td>@todo.ToDoPriorities.Name</td>

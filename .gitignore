@@ -1,1 +1,2 @@
-Migrations/
+ToDo/Persistence/Migrations
+ToDo/Core/Models/EmailSender.cs
