@@ -183,6 +183,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\EmailHourCheck.cs" />
     <Compile Include="Core\Models\EmailSender.cs" />
     <Compile Include="Core\Models\ToDoList.cs" />
     <Compile Include="Core\Models\ToDoPriorities.cs" />
@@ -209,9 +210,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Configuration\EmailHourCheckConfiguration.cs" />
     <Compile Include="Persistence\Migrations\201905240741592_Test.cs" />
     <Compile Include="Persistence\Migrations\201905240741592_Test.Designer.cs">
       <DependentUpon>201905240741592_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201905241412354_EmailHourCheckModel.cs" />
+    <Compile Include="Persistence\Migrations\201905241412354_EmailHourCheckModel.Designer.cs">
+      <DependentUpon>201905241412354_EmailHourCheckModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -301,6 +307,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Persistence\Migrations\201905240741592_Test.resx">
       <DependentUpon>201905240741592_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201905241412354_EmailHourCheckModel.resx">
+      <DependentUpon>201905241412354_EmailHourCheckModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

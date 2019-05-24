@@ -10,6 +10,10 @@ namespace ToDo.Persistence.Configuration
             Property(u => u.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            HasMany(t => t.EmailHourCheck)
+                .WithRequired(u => u.ApplicationUser)
+                .WillCascadeOnDelete(false);
         }
     }
 }
