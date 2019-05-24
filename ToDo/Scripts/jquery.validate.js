@@ -767,7 +767,7 @@ $.extend( $.validator, {
 					throw new TypeError( "The normalizer should return a string value." );
 				}
 
-				// Delete the normalizer from rules to avoid treating it as a pre-defined method.
+				// StatusController the normalizer from rules to avoid treating it as a pre-defined method.
 				delete rules.normalizer;
 			}
 
