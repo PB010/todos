@@ -1,5 +1,5 @@
 ﻿@using ToDo.Core.Models
-@model IEnumerable<ToDo.Core.Models.ToDoList>
+@model IEnumerable<ToDo.Core.ViewModels.ToDoViewModel>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -22,27 +22,15 @@ else
                 null,
                 new { @class = "btn btn-default" })
         </div>
-        <div class="pull-left">
-            @Html.ActionLink("Closest",
-                "CloserDate",
-                "Home",
-                null,
-                new { @class = "btn btn-default" })
-            @Html.ActionLink("Furthest",
-                "FurtherDate",
-                "Home",
-                null,
-                new { @class = "btn btn-default" })
-        </div>
 
         <div class="pull-right">
-            @Html.ActionLink("Oldest",
-                "SortAscending",
+            @Html.ActionLink("Time",
+                "Time",
                 "Home",
                 null,
                 new { @class = "btn btn-default" })
-            @Html.ActionLink("Newest",
-                "SortDescending",
+            @Html.ActionLink(@Model.ElementAt(0).Check,
+                "Date",
                 "Home",
                 null,
                 new { @class = "btn btn-default" })

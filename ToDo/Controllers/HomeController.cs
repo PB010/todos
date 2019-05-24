@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using ToDo.Core.Models;
+using ToDo.Core.ViewModels;
 using ToDo.Persistence;
 
 namespace ToDo.Controllers
@@ -27,7 +28,23 @@ namespace ToDo.Controllers
                 .Include(t => t.ToDoPriorities)
                 .ToList();
 
-            return View(toDo);
+            var viewModel = new List<ToDoViewModel>();
+
+            foreach (var toDoList in toDo)
+            {
+                viewModel.Add(new ToDoViewModel
+                {
+                    CreatedAt = toDoList.CreatedAt,
+                    Description = toDoList.Description,
+                    Id = toDoList.Id,
+                    Name = toDoList.Name,
+                    Time = toDoList.Time,
+                    ToDoPriorities = toDoList.ToDoPriorities,
+                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
+                    ToDoStatus = toDoList.ToDoStatus
+                });
+            }
+            return View(viewModel);
         }
 
         [Authorize]
@@ -74,33 +91,57 @@ namespace ToDo.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult SortDescending()
+        public ActionResult Date()
         {
             var todo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
-                .OrderByDescending(t => t.CreatedAt);
+                .ToList();
+            var viewModel = new List<ToDoViewModel>();
 
-            return View("Index", todo);
+            foreach (var toDoList in todo)
+            {
+                viewModel.Add(new ToDoViewModel
+                {
+                    CreatedAt = toDoList.CreatedAt,
+                    Description = toDoList.Description,
+                    Id = toDoList.Id,
+                    Name = toDoList.Name,
+                    Time = toDoList.Time,
+                    ToDoPriorities = toDoList.ToDoPriorities,
+                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
+                    ToDoStatus = toDoList.ToDoStatus
+                });
+            }
+
+            return View("Index", ToDoViewModel.OrderDate(viewModel));
         }
 
         [Authorize]
         [HttpGet]
-        public ActionResult FurtherDate()
+        public ActionResult Time()
         {
             var todo = _context.ToDoLists
-                .Include(t => t.ToDoPriorities).OrderByDescending(t => t.Time);
+                .Include(t => t.ToDoPriorities)
+                .ToList();
 
-            return View("Index", todo);
-        }
+            var viewModel = new List<ToDoViewModel>();
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult CloserDate()
-        {
-            var todo = _context.ToDoLists
-                .Include(t => t.ToDoPriorities).OrderBy(t => t.Time);
+            foreach (var toDoList in todo)
+            {
+                viewModel.Add(new ToDoViewModel
+                {
+                    CreatedAt = toDoList.CreatedAt,
+                    Description = toDoList.Description,
+                    Id = toDoList.Id,
+                    Name = toDoList.Name,
+                    Time = toDoList.Time,
+                    ToDoPriorities = toDoList.ToDoPriorities,
+                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
+                    ToDoStatus = toDoList.ToDoStatus
+                });
+            }
 
-            return View("Index", todo);
+            return View("Index", ToDoViewModel.OrderTime(viewModel));
         }
     }
 }
