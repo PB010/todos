@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ToDo.Core.Models;
 using ToDo.Core.ViewModels;
 using ToDo.Persistence;
@@ -70,7 +71,16 @@ namespace ToDo.Controllers
                 ToDoPrioritiesId = viewModel.ToDoPriority,
                 ToDoStatus = viewModel.ToDoStatus
             };
+            var email = new EmailHourCheck
+            {
+                ApplicationUserId = User.Identity.GetUserId(),
+                ToDoListId = toDo.Id,
+                Hour = false,
+                HalfAnHour = false
+                
+            };
 
+            _context.EmailHourChecks.Add(email);
             _context.ToDoLists.Add(toDo);
             _context.SaveChanges();
 

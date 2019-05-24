@@ -28,9 +28,9 @@ namespace ToDo.Persistence
             modelBuilder.Configurations.Add(new ToDoConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Entity<EmailHourCheck>()
-                .HasRequired(u => u.ApplicationUser)
+                .HasRequired(e => e.ToDoList)
                 .WithMany()
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }

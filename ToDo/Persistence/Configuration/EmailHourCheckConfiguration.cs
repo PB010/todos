@@ -7,6 +7,14 @@ namespace ToDo.Persistence.Configuration
     {
         public EmailHourCheckConfiguration()
         {
+            //HasKey(e => new {e.ApplicationUserId, e.ToDoList});
+            //
+            //Property(e => e.ApplicationUserId)
+            //    .HasColumnOrder(1);
+            //
+            //Property(e => e.ToDoListId)
+            //    .HasColumnOrder(2);
+
         }
     }
 }
