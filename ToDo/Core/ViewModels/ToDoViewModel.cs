@@ -20,6 +20,7 @@ namespace ToDo.Core.ViewModels
         public string Check { get {return (!Selector) ? "Newest" : "Oldest";}}
 
 
+
         public static IOrderedEnumerable<ToDoViewModel> OrderTime(List<ToDoViewModel> viewModels)
         {
             if (!Selector)
@@ -42,6 +43,24 @@ namespace ToDo.Core.ViewModels
 
             Selector = false;
             return viewModels.OrderByDescending(t => t.CreatedAt);
+        }
+
+        public static void MapToList(List<ToDoViewModel> viewModel, List<ToDoList> toDo)
+        {
+            foreach (var toDoList in toDo)
+            {
+                viewModel.Add(new ToDoViewModel
+                {
+                    CreatedAt = toDoList.CreatedAt,
+                    Description = toDoList.Description,
+                    Id = toDoList.Id,
+                    Name = toDoList.Name,
+                    Time = toDoList.Time,
+                    ToDoPriorities = toDoList.ToDoPriorities,
+                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
+                    ToDoStatus = toDoList.ToDoStatus
+                });
+            }
         }
     }
 }

@@ -15,20 +15,8 @@
 
 else
 {
-    <button onclick=@EmailSender.Send()>Test</button>
-
-
-
-
     <h2>My ToDo List</h2>
     <div>
-        <div class="custom">
-            @Html.ActionLink("New ToDo",
-                "Index",
-                "ToDo",
-                null,
-                new { @class = "btn btn-default" })
-        </div>
 
         <div class="pull-right">
             @Html.ActionLink("Time",
@@ -41,6 +29,11 @@ else
                 "Home",
                 null,
                 new { @class = "btn btn-default" })
+            @Html.ActionLink("New ToDo",
+                "Index",
+                "ToDo",
+                null,
+                new { @class = "btn btn-primary" })
         </div>
     </div>
     

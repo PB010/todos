@@ -30,20 +30,8 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            foreach (var toDoList in toDo)
-            {
-                viewModel.Add(new ToDoViewModel
-                {
-                    CreatedAt = toDoList.CreatedAt,
-                    Description = toDoList.Description,
-                    Id = toDoList.Id,
-                    Name = toDoList.Name,
-                    Time = toDoList.Time,
-                    ToDoPriorities = toDoList.ToDoPriorities,
-                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
-                });
-            }
+            ToDoViewModel.MapToList(viewModel, toDo);
+
             return View(viewModel);
         }
 
@@ -57,20 +45,8 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            foreach (var toDoList in toDo)
-            {
-                viewModel.Add(new ToDoViewModel
-                {
-                    CreatedAt = toDoList.CreatedAt,
-                    Description = toDoList.Description,
-                    Id = toDoList.Id,
-                    Name = toDoList.Name,
-                    Time = toDoList.Time,
-                    ToDoPriorities = toDoList.ToDoPriorities,
-                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
-                });
-            }
+            ToDoViewModel.MapToList(viewModel, toDo);
+
             return View("Index", viewModel.OrderBy(v => v.Name)); 
         }
 
@@ -84,20 +60,8 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            foreach (var toDoList in toDo)
-            {
-                viewModel.Add(new ToDoViewModel
-                {
-                    CreatedAt = toDoList.CreatedAt,
-                    Description = toDoList.Description,
-                    Id = toDoList.Id,
-                    Name = toDoList.Name,
-                    Time = toDoList.Time,
-                    ToDoPriorities = toDoList.ToDoPriorities,
-                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
-                });
-            }
+            ToDoViewModel.MapToList(viewModel, toDo);
+
             return View("Index", viewModel.OrderByDescending(v => v.ToDoPrioritiesId));
         }
 
@@ -111,20 +75,8 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            foreach (var toDoList in toDo)
-            {
-                viewModel.Add(new ToDoViewModel
-                {
-                    CreatedAt = toDoList.CreatedAt,
-                    Description = toDoList.Description,
-                    Id = toDoList.Id,
-                    Name = toDoList.Name,
-                    Time = toDoList.Time,
-                    ToDoPriorities = toDoList.ToDoPriorities,
-                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
-                });
-            }
+            ToDoViewModel.MapToList(viewModel, toDo);
+
             return View("Index", viewModel.OrderBy(t => t.ToDoStatus == ToDoStatus.Done));
         }
 
@@ -137,20 +89,7 @@ namespace ToDo.Controllers
                 .ToList();
             var viewModel = new List<ToDoViewModel>();
 
-            foreach (var toDoList in todo)
-            {
-                viewModel.Add(new ToDoViewModel
-                {
-                    CreatedAt = toDoList.CreatedAt,
-                    Description = toDoList.Description,
-                    Id = toDoList.Id,
-                    Name = toDoList.Name,
-                    Time = toDoList.Time,
-                    ToDoPriorities = toDoList.ToDoPriorities,
-                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
-                });
-            }
+            ToDoViewModel.MapToList(viewModel,todo);
 
             return View("Index", ToDoViewModel.OrderDate(viewModel));
         }
@@ -165,20 +104,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            foreach (var toDoList in todo)
-            {
-                viewModel.Add(new ToDoViewModel
-                {
-                    CreatedAt = toDoList.CreatedAt,
-                    Description = toDoList.Description,
-                    Id = toDoList.Id,
-                    Name = toDoList.Name,
-                    Time = toDoList.Time,
-                    ToDoPriorities = toDoList.ToDoPriorities,
-                    ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
-                });
-            }
+            ToDoViewModel.MapToList(viewModel,todo);
 
             return View("Index", ToDoViewModel.OrderTime(viewModel));
         }
