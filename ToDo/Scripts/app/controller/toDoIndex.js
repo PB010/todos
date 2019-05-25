@@ -2,46 +2,61 @@
 
 var StatusController = function (apiController) {
 
-    var statusButton;
+	var statusButton;
 
-    var statusChange = function () {
-        $(".js-status-todo").on("click", toggleStatus);
-    }
+	var statusChange = function () {
+		$(".js-status-todo").on("click", toggleStatus);
+	}
 
-    var toggleStatus = function (e) {
-        statusButton = $(e.target);
-        var toDoId = statusButton.attr("data-id-attr");
+	var toggleStatus = function (e) {
+		statusButton = $(e.target);
+		var toDoId = statusButton.attr("data-id-attr");
 
-        apiController.toggleStatus(toDoId, success);
-    }
+		apiController.toggleStatus(toDoId, success);
+	}
 
-    var success = function () {
-        var text = (statusButton.text == "Open") ? "Done" : "Open";
-        statusButton.parents('tr').toggleClass("new-color");
-        statusButton.text(text);
-    }
+	var success = function () {
+		var text = (statusButton.text == "Open") ? "Done" : "Open";
+		statusButton.parents("tr").toggleClass("new-color");
+		statusButton.text(text);
+	}
 
-    return {
-        statusChange: statusChange
-    }
+	return {
+		statusChange: statusChange
+	}
 }(StatusApiController);
 
 
+var StatusDelete = function(deleteStatus) {
+    var deleteButton;
 
-
-
-$(".js-delete-todo").on("click", function (e) {
-    var deleteButton = $(e.target);
-    if (confirm("Are you sure you want to delete this ToDo")) {
-        $.ajax({
-                url: "/api/toDos/" + deleteButton.attr("data-id-attr"),
-                method: "DELETE"
-            })
-            .done(function () {
-                deleteButton.closest('tr').remove();
-            })
-            .fail(function () {
-                alert("fail");
-            });
+	var deleteToDo = function() {
+		$(".js-delete-todo").on("click", deletePrompt);
     }
-});
+
+	var deletePrompt = function(e) {
+        deleteButton = $(e.target);
+        var buttonAttr = deleteButton.attr("data-id-attr");
+
+		if (confirm("Are you sure you want to delete this ToDo")) {
+			deleteStatus.ajaxDelete(buttonAttr, success, failure);
+		}
+	};
+
+	var failure = function() {
+		alert("Something failed");
+    };
+
+    var success = function() {
+	    deleteButton.closest("tr").remove();
+    }
+
+	return {
+		deleteToDo: deleteToDo
+	}
+
+}(DeleteApiController);
+
+
+
+

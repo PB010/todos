@@ -12,3 +12,19 @@ var StatusApiController = function () {
         toggleStatus: statusAjaxCall
     }
 }();
+
+var DeleteApiController = function () {
+
+	var ajaxDelete = function (buttonAttr, success, failure) {
+		$.ajax({
+				url: "/api/toDos/" + buttonAttr,
+				method: "DELETE"
+			})
+			.done(success)
+			.fail(failure);
+	};
+
+	return {
+		ajaxDelete: ajaxDelete
+	}
+}();
