@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -70,6 +71,9 @@ namespace ToDo.Controllers
             var todo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
                 .Single(t => t.Id == id);
+
+            if (todo == null)
+                throw new InvalidOperationException("This todo was not found.");
 
             var viewModel = new ToDoFormViewModel();
             viewModel.MapFormViewModel(todo);

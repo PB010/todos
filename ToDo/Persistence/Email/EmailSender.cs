@@ -48,9 +48,7 @@ namespace ToDo.Persistence.Email
             if (time <= 30 && time > 0 && !emailCheck.HalfAnHour)
             {
                 emailCheck.HalfAnHour = true;
-
                 EmailTemplate.TimeTemplate("Expiring ToDo - 30 minutes or less.", toDo);
-
                 _context.SaveChanges();
             }
         }
