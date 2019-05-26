@@ -229,3 +229,4 @@ C:\Users\bIur\Desktop\ToDo\ToDo\obj\Debug\ToDo.Migrations.DeleteToDoToDeleteEmai
 C:\Users\bIur\Desktop\ToDo\ToDo\obj\Debug\ToDo.Migrations.AddedStatusCheck.resources
 C:\Users\bIur\Desktop\ToDo\ToDo\obj\Debug\ToDo.Migrations.TestCheck.resources
 C:\Users\bIur\Desktop\ToDo\ToDo\obj\Debug\ToDo.Migrations.AnotherTest.resources
+C:\Users\bIur\Desktop\ToDo\ToDo\obj\Debug\ToDo.Migrations.RemoveStatusCheckedFromToDoList.resources

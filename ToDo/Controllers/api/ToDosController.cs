@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using System.Web.UI.WebControls;
@@ -43,14 +42,12 @@ namespace ToDo.Controllers.api
         [HttpPut]
         public IHttpActionResult ChangeStatus(int id)
         {
-            var userId = User.Identity.GetUserId();
-            var email = _context.EmailChecks.Single(e => e.ToDoListId == id && e.ApplicationUserId == userId);
             var todo = _context.ToDoLists.Single(t => t.Id == id);
 
             if (todo == null)
                 return BadRequest("There was no such todo.");
 
-            todo.ToDoStatus = todo.ToDoStatus == ToDoStatus.Open ? ToDoStatus.Done : ToDoStatus.Open;
+            todo.ChangeStatus();
 
             _context.SaveChanges();
 
@@ -61,7 +58,9 @@ namespace ToDo.Controllers.api
         [HttpGet]
         public IHttpActionResult OrderBy()
         {
-            var todo = _context.ToDoLists.Include(t => t.ToDoPriorities).OrderByDescending(t => t.CreatedAt);
+            var todo = _context.ToDoLists
+                .Include(t => t.ToDoPriorities)
+                .OrderByDescending(t => t.CreatedAt);
 
             return Ok(todo);
         }

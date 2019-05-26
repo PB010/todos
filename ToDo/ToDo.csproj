@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -232,6 +233,10 @@
     <Compile Include="Persistence\Migrations\201905261551263_AnotherTest.Designer.cs">
       <DependentUpon>201905261551263_AnotherTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201905261737104_RemoveStatusCheckedFromToDoList.cs" />
+    <Compile Include="Persistence\Migrations\201905261737104_RemoveStatusCheckedFromToDoList.Designer.cs">
+      <DependentUpon>201905261737104_RemoveStatusCheckedFromToDoList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\Configuration\EmailHourCheckConfiguration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -333,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201905261551263_AnotherTest.resx">
       <DependentUpon>201905261551263_AnotherTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201905261737104_RemoveStatusCheckedFromToDoList.resx">
+      <DependentUpon>201905261737104_RemoveStatusCheckedFromToDoList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

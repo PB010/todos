@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using ToDo.Core.Models;
 using ToDo.Core.ViewModels;
 using ToDo.Persistence;
@@ -29,28 +28,7 @@ namespace ToDo.Controllers
         
             return View("ToDoForm", viewModel);
         }
-        
 
-        public ActionResult Edit(int id)
-        {
-            var todo = _context.ToDoLists
-                .Include(t => t.ToDoPriorities)
-                .Single(t => t.Id == id);
-
-            var viewModel = new ToDoFormViewModel
-            {
-                CreatedAt = todo.CreatedAt,
-                Description = todo.Description,
-                Id = todo.Id,
-                Name = todo.Name,
-                Time = todo.Time,
-                ToDoPriority = todo.ToDoPrioritiesId,
-                Heading = "Edit ToDo",
-                ToDoPriorities = _context.ToDoPriorities.ToList()
-            };
-
-            return View("ToDoForm", viewModel);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -77,7 +55,7 @@ namespace ToDo.Controllers
                 ToDoListId = toDo.Id,
                 Hour = false,
                 HalfAnHour = false
-                
+
             };
 
             _context.EmailChecks.Add(email);
@@ -85,6 +63,19 @@ namespace ToDo.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var todo = _context.ToDoLists
+                .Include(t => t.ToDoPriorities)
+                .Single(t => t.Id == id);
+
+            var viewModel = new ToDoFormViewModel();
+            viewModel.MapFormViewModel(todo);
+            viewModel.ToDoPriorities = _context.ToDoPriorities.ToList();
+
+            return View("ToDoForm", viewModel);
         }
 
         [HttpPost]
@@ -95,16 +86,11 @@ namespace ToDo.Controllers
                 .Include(t => t.ToDoPriorities)
                 .Single(t => t.Id == viewModel.Id);
 
-            todo.Name = viewModel.Name;
-            todo.Description = viewModel.Description;
-            todo.Time = viewModel.Time;
-            todo.ToDoPrioritiesId = viewModel.ToDoPriority;
-            todo.UpdatedAt = DateTime.Now;
+            todo.UpdateToDo(viewModel);
 
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

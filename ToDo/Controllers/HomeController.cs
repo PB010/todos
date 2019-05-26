@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ namespace ToDo.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private string UserId => User.Identity.GetUserId();
 
         public HomeController()
         {
@@ -30,7 +32,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel, toDo);
+            ToDoViewModel.MapToList(viewModel, toDo, UserId);
 
             return View(viewModel);
         }
@@ -45,7 +47,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel, toDo);
+            ToDoViewModel.MapToList(viewModel, toDo, UserId);
 
             return View("Index", viewModel.OrderBy(v => v.Name)); 
         }
@@ -60,7 +62,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel, toDo);
+            ToDoViewModel.MapToList(viewModel, toDo, UserId);
 
             return View("Index", viewModel.OrderByDescending(v => v.ToDoPrioritiesId));
         }
@@ -75,7 +77,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel, toDo);
+            ToDoViewModel.MapToList(viewModel, toDo, UserId);
 
             return View("Index", viewModel.OrderBy(t => t.ToDoStatus == ToDoStatus.Done));
         }
@@ -87,9 +89,10 @@ namespace ToDo.Controllers
             var todo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
                 .ToList();
+
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel,todo);
+            ToDoViewModel.MapToList(viewModel,todo, UserId);
 
             return View("Index", ToDoViewModel.OrderDate(viewModel));
         }
@@ -104,7 +107,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel,todo);
+            ToDoViewModel.MapToList(viewModel,todo, UserId);
 
             return View("Index", ToDoViewModel.OrderTime(viewModel));
         }

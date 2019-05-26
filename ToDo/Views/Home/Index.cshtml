@@ -1,11 +1,8 @@
-﻿@using System.Configuration
-@using Microsoft.AspNet.Identity
-@using ToDo.Core.Models
+﻿@using ToDo.Core.Models
 @using ToDo.Persistence.Email
 @model IEnumerable<ToDo.Core.ViewModels.ToDoViewModel>
 @{
     ViewBag.Title = "Home Page";
-    var userId = User.Identity.GetUserId();
 }
 
 @if (!User.Identity.IsAuthenticated)
@@ -64,8 +61,6 @@ else
         <tbody>
             @foreach (var todo in Model)
             {
-                var time = new TimeSpan();
-                time = todo.Time - DateTime.Now;
                 <tr class="@(todo.ToDoStatus == ToDoStatus.Open ? "" : "new-color")">
                     <td>@todo.Name</td>
                     <td>@todo.Description</td>
@@ -85,15 +80,16 @@ else
                         <button data-id-attr="@todo.Id" class="btn-link js-delete-todo">Delete</button>
                     </td>
                 </tr>
-                EmailSender.SendAnHourBefore(todo, userId, time);
-                EmailSender.SendHalfAnHourBefore(todo, userId, time);
+                EmailSender.SendAnHourBefore(todo);
+                EmailSender.SendHalfAnHourBefore(todo);
+
                 if (todo.ToDoStatus == ToDoStatus.Done)
                 {
-                    EmailSender.SendStatusChange(todo, userId);
+                    EmailSender.SendStatusChange(todo);
                 }
                 if (todo.ToDoStatus == ToDoStatus.Open)
                 {
-                    EmailSender.ResetStatus(todo, userId);
+                    EmailSender.ResetStatus(todo);
                 }
 
             }

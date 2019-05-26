@@ -23,10 +23,17 @@ namespace ToDo.Core.ViewModels
         public IEnumerable<ToDoPriorities> ToDoPriorities { get; set; }
         public string Heading { get; set; }
 
-        public string Action
-        {
-            get { return (Id == 0) ? "New" : "Update"; }
-        }
+        public string Action { get { return (Id == 0) ? "New" : "Update"; } }
 
+        public void MapFormViewModel(ToDoList todo)
+        { 
+            CreatedAt = todo.CreatedAt;
+            Description = todo.Description;
+            Id = todo.Id;
+            Name = todo.Name;
+            Time = todo.Time;
+            ToDoPriority = todo.ToDoPrioritiesId;
+            Heading = "Edit ToDo";
+        }
     }
 }

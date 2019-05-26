@@ -17,34 +17,35 @@ namespace ToDo.Persistence.Email
         }
 
 
-        public static void SendAnHourBefore(ToDoViewModel toDo, string userId, TimeSpan time)
+        public static void SendAnHourBefore(ToDoViewModel toDo)
         {
+            var time = (toDo.Time - DateTime.Now).TotalMinutes;
             var emailCheck = _context.EmailChecks
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == userId);
+                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
             if (emailCheck == null)
                 throw new HttpRequestException();
 
-            if (time.TotalMinutes <= 60 && time.TotalMinutes >= 31 && !emailCheck.Hour)
+            if (time <= 60 && time >= 31 && !emailCheck.Hour)
             {
                 emailCheck.Hour = true;
                 EmailTemplate.TimeTemplate("Expiring ToDo - 1 hour or less.", toDo);
 
                 _context.SaveChanges();
             }
-            
         }
 
 
-        public static void SendHalfAnHourBefore(ToDoViewModel toDo, string userId, TimeSpan time)
+        public static void SendHalfAnHourBefore(ToDoViewModel toDo)
         {
+            var time = (toDo.Time - DateTime.Now).TotalMinutes;
             var emailCheck = _context.EmailChecks
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == userId);
+                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
             if (emailCheck == null)
                 throw new HttpRequestException();
 
-            if (time.TotalMinutes <= 30 && time.TotalMinutes > 0 && !emailCheck.HalfAnHour)
+            if (time <= 30 && time > 0 && !emailCheck.HalfAnHour)
             {
                 emailCheck.HalfAnHour = true;
 
@@ -52,16 +53,14 @@ namespace ToDo.Persistence.Email
 
                 _context.SaveChanges();
             }
-
-                
         }
 
 
-        public static void SendStatusChange(ToDoViewModel toDo, string userId)
+        public static void SendStatusChange(ToDoViewModel toDo)
         {
             var emailCheck = _context.EmailChecks
                 .Include(e => e.ToDoList)
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == userId);
+                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
             if (!emailCheck.StatusCheck)
             {
@@ -71,11 +70,11 @@ namespace ToDo.Persistence.Email
             }
         }
 
-        public static void ResetStatus(ToDoViewModel toDo, string userId)
+        public static void ResetStatus(ToDoViewModel toDo)
         {
             var emailCheck = _context.EmailChecks
                 .Include(e => e.ToDoList)
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == userId);
+                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
             emailCheck.StatusCheck = false;
             _context.SaveChanges();
