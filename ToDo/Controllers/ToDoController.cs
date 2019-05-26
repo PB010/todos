@@ -71,7 +71,7 @@ namespace ToDo.Controllers
                 ToDoPrioritiesId = viewModel.ToDoPriority,
                 ToDoStatus = viewModel.ToDoStatus
             };
-            var email = new EmailHourCheck
+            var email = new EmailCheck
             {
                 ApplicationUserId = User.Identity.GetUserId(),
                 ToDoListId = toDo.Id,
@@ -80,7 +80,7 @@ namespace ToDo.Controllers
                 
             };
 
-            _context.EmailHourChecks.Add(email);
+            _context.EmailChecks.Add(email);
             _context.ToDoLists.Add(toDo);
             _context.SaveChanges();
 

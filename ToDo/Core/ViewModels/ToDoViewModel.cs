@@ -14,6 +14,7 @@ namespace ToDo.Core.ViewModels
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public ToDoStatus ToDoStatus { get; set; }
+        public bool StatusCheck { get; set; }
         public int ToDoPrioritiesId { get; set; }
         public ToDoPriorities ToDoPriorities { get; set; }
         public static bool Selector { get; set; }
@@ -52,13 +53,15 @@ namespace ToDo.Core.ViewModels
                 viewModel.Add(new ToDoViewModel
                 {
                     CreatedAt = toDoList.CreatedAt,
+                    UpdatedAt = toDoList.UpdatedAt,
                     Description = toDoList.Description,
                     Id = toDoList.Id,
                     Name = toDoList.Name,
                     Time = toDoList.Time,
                     ToDoPriorities = toDoList.ToDoPriorities,
                     ToDoPrioritiesId = toDoList.ToDoPrioritiesId,
-                    ToDoStatus = toDoList.ToDoStatus
+                    ToDoStatus = toDoList.ToDoStatus,
+                    StatusCheck = toDoList.StatusCheck
                 });
             }
         }

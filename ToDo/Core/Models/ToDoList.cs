@@ -11,8 +11,9 @@ namespace ToDo.Core.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public ToDoStatus ToDoStatus { get; set; }
+        public bool StatusCheck { get; set; }
         public int ToDoPrioritiesId { get; set; }
         public ToDoPriorities ToDoPriorities { get; set; }
-        public EmailHourCheck EmailHourCheck { get; set; }
+        
     }
 }

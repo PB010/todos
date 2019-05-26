@@ -1,6 +1,7 @@
 ﻿@using System.Configuration
 @using Microsoft.AspNet.Identity
 @using ToDo.Core.Models
+@using ToDo.Persistence.Email
 @model IEnumerable<ToDo.Core.ViewModels.ToDoViewModel>
 @{
     ViewBag.Title = "Home Page";
@@ -84,10 +85,17 @@ else
                         <button data-id-attr="@todo.Id" class="btn-link js-delete-todo">Delete</button>
                     </td>
                 </tr>
-                    EmailSender.SendAnHourBefore(todo, userId, time);
-                
-                    EmailSender.SendHalfAnHourBefore(todo, userId, time);
-                
+                EmailSender.SendAnHourBefore(todo, userId, time);
+                EmailSender.SendHalfAnHourBefore(todo, userId, time);
+                if (todo.ToDoStatus == ToDoStatus.Done)
+                {
+                    EmailSender.SendStatusChange(todo, userId);
+                }
+                if (todo.ToDoStatus == ToDoStatus.Open)
+                {
+                    EmailSender.ResetStatus(todo, userId);
+                }
+
             }
         </tbody>
     </table>
@@ -96,7 +104,8 @@ else
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+
             StatusController.statusChange();
             StatusDelete.deleteToDo();
         });

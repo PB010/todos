@@ -108,10 +108,5 @@ namespace ToDo.Controllers
 
             return View("Index", ToDoViewModel.OrderTime(viewModel));
         }
-
-        public ActionResult About()
-        {
-            return View();
-        }
     }
 }

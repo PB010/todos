@@ -11,7 +11,7 @@ namespace ToDo.Persistence
     {
         public DbSet<ToDoList> ToDoLists { get; set; }
         public DbSet<ToDoPriorities> ToDoPriorities { get; set; }
-        public DbSet<EmailHourCheck> EmailHourChecks { get; set; }
+        public DbSet<EmailCheck> EmailChecks { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -27,7 +27,7 @@ namespace ToDo.Persistence
         {
             modelBuilder.Configurations.Add(new ToDoConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
-            modelBuilder.Entity<EmailHourCheck>()
+            modelBuilder.Entity<EmailCheck>()
                 .HasRequired(e => e.ToDoList)
                 .WithMany()
                 .WillCascadeOnDelete(true);

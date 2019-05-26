@@ -3,7 +3,7 @@ using ToDo.Core.Models;
 
 namespace ToDo.Persistence.Configuration
 {
-    public class EmailHourCheckConfiguration : EntityTypeConfiguration<EmailHourCheck>
+    public class EmailHourCheckConfiguration : EntityTypeConfiguration<EmailCheck>
     {
         public EmailHourCheckConfiguration()
         {

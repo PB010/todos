@@ -1,2 +1,2 @@
 ToDo/Persistence/Migrations
-ToDo/Persistence/Email/EmailTemplate.cs
+ToDo/Core/EmailTemplate.cs

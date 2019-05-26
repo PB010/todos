@@ -1,6 +1,6 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Web.Http;
 using System.Web.UI.WebControls;
 using ToDo.Core.Models;
@@ -43,6 +43,8 @@ namespace ToDo.Controllers.api
         [HttpPut]
         public IHttpActionResult ChangeStatus(int id)
         {
+            var userId = User.Identity.GetUserId();
+            var email = _context.EmailChecks.Single(e => e.ToDoListId == id && e.ApplicationUserId == userId);
             var todo = _context.ToDoLists.Single(t => t.Id == id);
 
             if (todo == null)

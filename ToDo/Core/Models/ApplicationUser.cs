@@ -9,7 +9,7 @@ namespace ToDo.Core.Models
     public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
-        public ICollection<EmailHourCheck> EmailHourCheck { get; set; }
+        public ICollection<EmailCheck> EmailHourCheck { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

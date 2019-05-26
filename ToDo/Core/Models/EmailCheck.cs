@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDo.Core.Models
 {
-    public class EmailHourCheck
+    public class EmailCheck
     {
         public bool Hour { get; set; }
         public bool HalfAnHour { get; set; }
+        public bool StatusCheck { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public ToDoList ToDoList { get; set; }
         [Key]

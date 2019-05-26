@@ -183,8 +183,10 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
-    <Compile Include="Core\Models\EmailHourCheck.cs" />
-    <Compile Include="Core\Models\EmailSender.cs" />
+    <Compile Include="Core\Models\EmailCheck.cs" />
+    <Compile Include="Core\Models\EmailStatusCheck.cs" />
+    <Compile Include="Persistence\Email\EmailSender.cs" />
+    <Compile Include="Core\EmailTemplate.cs" />
     <Compile Include="Core\Models\ToDoList.cs" />
     <Compile Include="Core\Models\ToDoPriorities.cs" />
     <Compile Include="Core\Models\ToDoStatus.cs" />
@@ -217,6 +219,18 @@
     <Compile Include="Persistence\Migrations\201905242042030_DeleteToDoToDeleteEmailCheck.cs" />
     <Compile Include="Persistence\Migrations\201905242042030_DeleteToDoToDeleteEmailCheck.Designer.cs">
       <DependentUpon>201905242042030_DeleteToDoToDeleteEmailCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201905261403590_AddedStatusCheck.cs" />
+    <Compile Include="Persistence\Migrations\201905261403590_AddedStatusCheck.Designer.cs">
+      <DependentUpon>201905261403590_AddedStatusCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201905261420382_TestCheck.cs" />
+    <Compile Include="Persistence\Migrations\201905261420382_TestCheck.Designer.cs">
+      <DependentUpon>201905261420382_TestCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201905261551263_AnotherTest.cs" />
+    <Compile Include="Persistence\Migrations\201905261551263_AnotherTest.Designer.cs">
+      <DependentUpon>201905261551263_AnotherTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\Configuration\EmailHourCheckConfiguration.cs" />
@@ -310,6 +324,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201905242042030_DeleteToDoToDeleteEmailCheck.resx">
       <DependentUpon>201905242042030_DeleteToDoToDeleteEmailCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201905261403590_AddedStatusCheck.resx">
+      <DependentUpon>201905261403590_AddedStatusCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201905261420382_TestCheck.resx">
+      <DependentUpon>201905261420382_TestCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201905261551263_AnotherTest.resx">
+      <DependentUpon>201905261551263_AnotherTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
