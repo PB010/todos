@@ -20,6 +20,9 @@ namespace ToDo.Persistence.Configuration
             
             Property(t => t.Name)
                 .HasMaxLength(100);
+
+            Property(t => t.UserId)
+                .IsRequired();
         }
     }
 }

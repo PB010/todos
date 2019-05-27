@@ -23,8 +23,6 @@ namespace ToDo.Persistence.Email
             var emailCheck = _context.EmailChecks
                 .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
-            if (emailCheck == null)
-                throw new HttpRequestException();
 
             if (time <= 60 && time >= 31 && !emailCheck.Hour)
             {
@@ -40,10 +38,7 @@ namespace ToDo.Persistence.Email
         {
             var time = (toDo.Time - DateTime.Now).TotalMinutes;
             var emailCheck = _context.EmailChecks
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
-
-            if (emailCheck == null)
-                throw new HttpRequestException();
+                .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
             if (time <= 30 && time > 0 && !emailCheck.HalfAnHour)
             {
@@ -58,9 +53,9 @@ namespace ToDo.Persistence.Email
         {
             var emailCheck = _context.EmailChecks
                 .Include(e => e.ToDoList)
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
+                .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
-            if (!emailCheck.StatusCheck)
+            if (!emailCheck.StatusCheck && emailCheck != null)
             {
                 emailCheck.StatusCheck = true;
                 _context.SaveChanges();
@@ -70,12 +65,15 @@ namespace ToDo.Persistence.Email
 
         public static void ResetStatus(ToDoViewModel toDo)
         {
-            var emailCheck = _context.EmailChecks
-                .Include(e => e.ToDoList)
-                .Single(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
+           var emailCheck = _context.EmailChecks
+               .Include(e => e.ToDoList)
+               .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
-            emailCheck.StatusCheck = false;
-            _context.SaveChanges();
+           if (emailCheck != null)
+           {
+               emailCheck.StatusCheck = false;
+               _context.SaveChanges();
+           }
         }
     }
 

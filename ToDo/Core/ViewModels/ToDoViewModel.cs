@@ -46,7 +46,7 @@ namespace ToDo.Core.ViewModels
             return viewModels.OrderByDescending(t => t.CreatedAt);
         }
 
-        public static void MapToList(List<ToDoViewModel> viewModel, List<ToDoList> toDo, string userId)
+        public static void MapToList(List<ToDoViewModel> viewModel, List<ToDoList> toDo)
         {
             foreach (var toDoList in toDo)
             {
@@ -55,7 +55,7 @@ namespace ToDo.Core.ViewModels
                     CreatedAt = toDoList.CreatedAt,
                     UpdatedAt = toDoList.UpdatedAt,
                     Description = toDoList.Description,
-                    UserId = userId,
+                    UserId = toDoList.UserId,
                     Id = toDoList.Id,
                     Name = toDoList.Name,
                     Time = toDoList.Time,

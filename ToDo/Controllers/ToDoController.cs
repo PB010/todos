@@ -13,6 +13,9 @@ namespace ToDo.Controllers
     public class ToDoController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        private string UserId => User.Identity.GetUserId();
+
         public ToDoController()
         {
             _context = new ApplicationDbContext();
@@ -48,11 +51,12 @@ namespace ToDo.Controllers
                 Description = viewModel.Description,
                 Time = viewModel.Time,
                 ToDoPrioritiesId = viewModel.ToDoPriority,
-                ToDoStatus = viewModel.ToDoStatus
+                ToDoStatus = viewModel.ToDoStatus,
+                UserId = UserId
             };
             var email = new EmailCheck
             {
-                ApplicationUserId = User.Identity.GetUserId(),
+                ApplicationUserId = UserId,
                 ToDoListId = toDo.Id,
                 Hour = false,
                 HalfAnHour = false

@@ -18,21 +18,25 @@ else
     <div>
 
         <div class="pull-right">
-            @Html.ActionLink("Time",
-                "Time",
-                "Home",
-                null,
-                new { @class = "btn btn-default" })
-            @Html.ActionLink(@Model.ElementAt(0).Check,
-                "Date",
-                "Home",
-                null,
-                new { @class = "btn btn-default" })
+            @if (Model.Any())
+            {
+                @Html.ActionLink("Time",
+                    "Time",
+                    "Home",
+                    null,
+                    new {@class = "btn btn-default btn-custom-margin"})
+
+                @Html.ActionLink(@Model.ElementAt(0).Check,
+                    "Date",
+                    "Home",
+                    null,
+                    new {@class = "btn btn-default"})
+            }
             @Html.ActionLink("New ToDo",
                 "Index",
                 "ToDo",
                 null,
-                new { @class = "btn btn-primary" })
+                new {@class = "btn btn-primary"})
         </div>
     </div>
     
