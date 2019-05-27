@@ -4,6 +4,7 @@
 @model IEnumerable<ToDo.Core.ViewModels.ToDoViewModel>
 @{
     ViewBag.Title = "Home Page";
+    var userId = User.Identity.GetUserId();
 }
 
 @if (!User.Identity.IsAuthenticated)
@@ -66,7 +67,7 @@ else
         <tbody>
             @foreach (var todo in Model)
             {
-                if (todo.UserId == User.Identity.GetUserId())
+                if (todo.UserId == userId)
                 {
                     <tr class="@(todo.ToDoStatus == ToDoStatus.Open ? "" : "new-color")">
                         <td>@todo.Name</td>

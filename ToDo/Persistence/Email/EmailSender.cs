@@ -21,7 +21,7 @@ namespace ToDo.Persistence.Email
         {
             var time = (toDo.Time - DateTime.Now).TotalMinutes;
             var emailCheck = _context.EmailChecks
-                .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
+                .SingleOrDefault(e => e.ToDoListId == toDo.Id);
 
 
             if (time <= 60 && time >= 31 && !emailCheck.Hour)
@@ -38,7 +38,7 @@ namespace ToDo.Persistence.Email
         {
             var time = (toDo.Time - DateTime.Now).TotalMinutes;
             var emailCheck = _context.EmailChecks
-                .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
+                .SingleOrDefault(e => e.ToDoListId == toDo.Id);
 
             //if (emailCheck == null)
             //    throw new HttpRequestException();

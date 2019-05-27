@@ -28,7 +28,6 @@ namespace ToDo.Controllers
 
             var toDo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
-                .Where(t => t.UserId == UserId)
                 .ToList();
 
             var viewModel = new List<ToDoViewModel>();
