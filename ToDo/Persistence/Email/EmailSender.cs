@@ -40,6 +40,9 @@ namespace ToDo.Persistence.Email
             var emailCheck = _context.EmailChecks
                 .SingleOrDefault(e => e.ToDoListId == toDo.Id && e.ApplicationUserId == toDo.UserId);
 
+            //if (emailCheck == null)
+            //    throw new HttpRequestException();
+
             if (time <= 30 && time > 0 && !emailCheck.HalfAnHour)
             {
                 emailCheck.HalfAnHour = true;

@@ -49,7 +49,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel, toDo);
+            ToDoViewModel.MapToList(viewModel, toDo); ;
 
             return View("Index", viewModel.OrderBy(v => v.Name)); 
         }
@@ -65,7 +65,7 @@ namespace ToDo.Controllers
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel, toDo);
+            ToDoViewModel.MapToList(viewModel, toDo); ;
 
             return View("Index", viewModel.OrderByDescending(v => v.ToDoPrioritiesId));
         }
@@ -90,14 +90,14 @@ namespace ToDo.Controllers
         [HttpGet]
         public ActionResult Date()
         {
-            var todo = _context.ToDoLists
+            var toDo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
                 .Where(t => t.UserId == UserId)
                 .ToList();
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel,todo);
+            ToDoViewModel.MapToList(viewModel, toDo);
 
             return View("Index", ToDoViewModel.OrderDate(viewModel));
         }
@@ -106,14 +106,14 @@ namespace ToDo.Controllers
         [HttpGet]
         public ActionResult Time()
         {
-            var todo = _context.ToDoLists
+            var toDo = _context.ToDoLists
                 .Include(t => t.ToDoPriorities)
                 .Where(t => t.UserId == UserId)
                 .ToList();
 
             var viewModel = new List<ToDoViewModel>();
 
-            ToDoViewModel.MapToList(viewModel,todo);
+            ToDoViewModel.MapToList(viewModel, toDo);
 
             return View("Index", ToDoViewModel.OrderTime(viewModel));
         }
