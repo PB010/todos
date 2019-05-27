@@ -2,7 +2,8 @@
 
 var StatusController = function (apiController) {
 
-	var statusButton;
+    var statusButton;
+    var check = false;
 
 	var statusChange = function () {
 		$(".js-status-todo").on("click", toggleStatus);
@@ -11,15 +12,22 @@ var StatusController = function (apiController) {
 	var toggleStatus = function (e) {
 		statusButton = $(e.target);
 		var toDoId = statusButton.attr("data-id-attr");
-
+        check = !check;
 		apiController.toggleStatus(toDoId, success);
 	}
+    
+    var textChange = function () {
+        if (!check) {
+            statusButton.text("Open");
+        } else if (check) {
+            statusButton.text("Done");
+        }
+    }
 
 	var success = function () {
-		var text = (statusButton.text == "Open") ? "Done" : "Open";
-		statusButton.parents("tr").toggleClass("new-color");
-		statusButton.text(text);
-	}
+        statusButton.parents("tr").toggleClass("new-color");
+        textChange();
+    }
 
 	return {
 		statusChange: statusChange
